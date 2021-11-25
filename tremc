@@ -443,7 +443,7 @@ config.set('Colors', 'file_prio_normal', 'fg:default,bg:default')
 config.set('Colors', 'file_prio_low', 'fg:yellow,bg:default')
 config.set('Colors', 'file_prio_off', 'fg:blue,bg:default')
 config.set('Colors', 'selection', 'bg:default,fg:default')
-
+config.set('Colors', 'tracker_title', 'bg:default,fg:default')
 
 class ColorManager:
     def __init__(self, config):
@@ -2703,7 +2703,6 @@ class Interface:
         tag = curses.color_pair(self.colors.ind('title_incomplete')) + curses.A_REVERSE
         tag_done = color
         if focused:
-            tag += curses.color_pair(self.colors.ind('selection'))
             tag += curses.A_BOLD
             tag_done += curses.A_BOLD
 
@@ -3315,8 +3314,10 @@ class Interface:
             if current_tier != t['tier']:
                 current_tier = t['tier']
 
-                tiercolor = curses.color_pair(self.colors.ind('selection')) + curses.A_BOLD + curses.A_REVERSE \
-                    if selected else curses.A_REVERSE
+                if selected:
+                    tiercolor = curses.color_pair(self.colors.ind('selection')) + curses.A_BOLD + curses.A_REVERSE
+                else:
+                    tiercolor = curses.color_pair(self.colors.ind('tracker_title'))
                 addstr(ypos, 0, ("Tier %d" % (current_tier + 1)).ljust(self.width), tiercolor)
                 ypos += 1
 
