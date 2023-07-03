@@ -54,9 +54,9 @@ class GConfig:
     VERSION = '0.9.2'
 
     TRNSM_VERSION_MIN = '1.90'
-    TRNSM_VERSION_MAX = '3.0.0'
+    TRNSM_VERSION_MAX = '5.0.0'
     RPC_VERSION_MIN = 8
-    RPC_VERSION_MAX = 16
+    RPC_VERSION_MAX = 17
 
     STARTTIME = time.time()
     DEBUG = False
@@ -2288,9 +2288,8 @@ class Interface:
                 ]
 
                 for f in possible_file_locations:
-                    if os.path.isfile(f):
-                        file_path = f
-                        break
+                    file_path = f
+                    break
                 if file_path:
                     file_names.append(file_path)
 
